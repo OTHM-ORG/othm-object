@@ -11,11 +11,6 @@ struct othm_stack *stack_gen(void)
 	return stack;
 }
 
-struct othm_list *cell_gen(void)
-{
-	return malloc(sizeof(struct othm_list));
-}
-
 struct othm_list *ogst_list_gen(void)
 {
 	struct othm_obj_tag *tagged =
@@ -35,8 +30,8 @@ OTHM_CHAIN_DEFUN(dot, dot)
 	stack = control->state;
 	symbol = othm_stack_pop(stack);
 
-	printf("WHAT?");
 	othm_symbol_print(symbol);
+	printf("\n");
 }
 
 OTHM_SYMBOL_INIT(popped);
@@ -45,11 +40,11 @@ int main(void)
 {
 	struct othm_stack *stack;
 
-        stack = othm_stack_new(stack_gen, cell_gen);
+        stack = othm_stack_new(stack_gen);
 	othm_stack_push(stack, OTHM_SYMBOL(popped));
 
 	struct othm_list *chain =
-		OTHM_CHAIN_DIRECT(NULL, dot);
+		OTHM_CHAIN_DIRECT(ogst_list_gen, dot);
 
     /* printf("Waiting for a connection...\n"); */
 	/* int i = 0; */
@@ -58,8 +53,6 @@ int main(void)
 	struct othm_thread *thread = othm_thread_new(9, chain, NULL,
 						     NULL, stack);
 	othm_thread_start(thread);
-
-	/* printf("\nHello, world!\n"); */
 
 	pthread_exit(NULL);
 	return 0;
