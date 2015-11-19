@@ -17,5 +17,6 @@ uninstall :
 	-rm  /usr/lib/libothm_object.so
 	ldconfig
 test :
-	gcc -o test test.c -lothm_object
+	gcc -o test test.c -lothm_object -lothm_thread -lothm_symbols \
+	-lothm_hashmap -lothm_base -lpthread
 	./test

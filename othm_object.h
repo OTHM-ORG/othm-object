@@ -6,8 +6,8 @@ struct othm_obj_tag {
 	void *type;
 	void *container;
 	void *data_form;
-	struct othm_symbol_struct *destructor;
-	struct othm_symbol_struct *printer;
+	/* struct othm_symbol_struct *destructor; */
+	/* struct othm_symbol_struct *printer; */
 };
 
 #endif
